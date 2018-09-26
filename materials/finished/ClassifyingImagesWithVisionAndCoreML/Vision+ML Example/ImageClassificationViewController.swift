@@ -81,6 +81,9 @@ class ImageClassificationViewController: UIViewController {
                     // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
                    return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
+                // Added by Adam Brassfield
+                playSound(for: descriptions[0])
+                // end
                 self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
             }
         }
@@ -135,4 +138,9 @@ extension ImageClassificationViewController: UIImagePickerControllerDelegate, UI
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
+}
+
+// Added by Adam Brassfield
+func playSound(for animal:String) {
+    print(animal)
 }
