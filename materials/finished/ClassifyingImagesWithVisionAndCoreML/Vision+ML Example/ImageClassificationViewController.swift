@@ -144,3 +144,11 @@ fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePicke
 func playSound(for animal:String) {
     print(animal)
 }
+
+//Added by Caitlin Jones
+func addText(for animal:String){
+    //Add text overlay to picture
+    //Identify the correct sound for the animal identified
+    //Concatenate the output string
+    //output the string
+}
