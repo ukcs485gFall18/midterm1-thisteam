@@ -13,10 +13,12 @@ import ImageIO
 class ImageClassificationViewController: UIViewController {
     // MARK: - IBOutlets
     
+    @IBOutlet weak var similarityLable: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var classificationLabel: UILabel!
     
+
     // MARK: - Image Classification
     
     /// - Tag: MLModelSetup
@@ -39,6 +41,66 @@ class ImageClassificationViewController: UIViewController {
         }
     }()
     
+    lazy var similarityRequest: VNCoreMLRequest = {
+        do{
+            let model = try VNCoreMLModel(for: SimilarAnimals().model)
+            
+            let request = VNCoreMLRequest(model: model, completionHandler: { [weak self] request, error in
+                self?.processQuery(for: request, error: error)
+            })
+            request.imageCropAndScaleOption = .centerCrop
+            return request
+        } catch{
+            fatalError("Failed to load ML Model: \(error)")
+        }
+    }()
+    
+    func processQuery(for request: VNRequest, error: Error?, k: Int = 5) {
+        DispatchQueue.main.async {
+            guard let results = request.results else {
+                self.similarityLable.text = "Unable to rank image.\n\(error!.localizedDescription)"
+                return
+            }
+            
+            let queryResults = results as! [VNCoreMLFeatureValueObservation]
+            let distances = queryResults.first!.featureValue.multiArrayValue!
+            
+            // Create an array of distances to sort
+            let numReferenceImages = distances.shape[0].intValue
+            var distanceArray = [Double]()
+            for r in 0..<numReferenceImages {
+                distanceArray.append(Double(truncating: distances[r]))
+            }
+            
+            let sorted = distanceArray.enumerated().sorted(by: {$0.element < $1.element})
+            let knn = sorted[..<min(k, numReferenceImages)]
+            let first = knn[0]
+            
+            self.similarityLable.text = "Image number" + String(describing: first.offset) + "is most similar."
+        }
+    }
+    
+    func updateSimilarity(for image: UIImage){
+        similarityLable.text = "Finding Similarities..."
+        let orientation = CGImagePropertyOrientation(image.imageOrientation)
+        guard let ciImage = CIImage(image: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let handler = VNImageRequestHandler(ciImage: ciImage, orientation: orientation)
+            do {
+                try handler.perform([self.similarityRequest])
+            } catch {
+                /*
+                 This handler catches general image processing errors. The `classificationRequest`'s
+                 completion handler `processClassifications(_:error:)` catches errors specific
+                 to processing that request.
+                 */
+                print("Failed to perform classification.\n\(error.localizedDescription)")
+            }
+        }
+    
+    }
+
     /// - Tag: PerformRequests
     func updateClassifications(for image: UIImage) {
         classificationLabel.text = "Classifying..."
@@ -76,10 +138,10 @@ class ImageClassificationViewController: UIViewController {
                 self.classificationLabel.text = "Nothing recognized."
             } else {
                 // Display top classifications ranked by confidence in the UI.
-                let topClassifications = classifications.prefix(2)
+                let topClassifications = classifications.prefix(5)
                 let descriptions = topClassifications.map { classification in
                     // Formats the classification for display; e.g. "(0.37) cliff, drop, drop-off".
-                   return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
+                   return String(format: "  (%.6f) %@", classification.confidence, classification.identifier)
                 }
                 // Added by Adam Brassfield
                 playSound(for: descriptions[0])
@@ -132,6 +194,7 @@ extension ImageClassificationViewController: UIImagePickerControllerDelegate, UI
       let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         imageView.image = image
         updateClassifications(for: image)
+        updateSimilarity(for: image)
     }
 }
 
