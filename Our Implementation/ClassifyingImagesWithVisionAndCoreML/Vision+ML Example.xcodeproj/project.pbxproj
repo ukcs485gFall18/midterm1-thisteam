@@ -13,6 +13,10 @@
 		11063F691EC0EECC0033EE6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11063F681EC0EECC0033EE6D /* Assets.xcassets */; };
 		11063F741EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11063F731EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift */; };
 		113695D81EC1151400CA6C43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 113695D61EC1151400CA6C43 /* LaunchScreen.storyboard */; };
+		665B8906216151D2003D8C08 /* bark.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665B8905216151D2003D8C08 /* bark.mp3 */; };
+		665B890821615318003D8C08 /* meow.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665B890721615318003D8C08 /* meow.mp3 */; };
+		665B890A2161534D003D8C08 /* moo.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665B89092161534D003D8C08 /* moo.mp3 */; };
+		665B890C2161538A003D8C08 /* baah.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 665B890B2161538A003D8C08 /* baah.mp3 */; };
 		D8D62F8921614AE4003BC27B /* AnimalClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = D8D62F8821614AE4003BC27B /* AnimalClassifier.mlmodel */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +29,10 @@
 		11063F6D1EC0EECC0033EE6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11063F731EC0F5270033EE6D /* CGImagePropertyOrientation+UIImageOrientation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGImagePropertyOrientation+UIImageOrientation.swift"; sourceTree = "<group>"; };
 		113695D71EC1151400CA6C43 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		665B8905216151D2003D8C08 /* bark.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bark.mp3; sourceTree = "<group>"; };
+		665B890721615318003D8C08 /* meow.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = meow.mp3; sourceTree = "<group>"; };
+		665B89092161534D003D8C08 /* moo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = moo.mp3; sourceTree = "<group>"; };
+		665B890B2161538A003D8C08 /* baah.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = baah.mp3; sourceTree = "<group>"; };
 		A9558E70A9563BA000000001 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		D8D62F8821614AE4003BC27B /* AnimalClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = AnimalClassifier.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +68,7 @@
 		11063F601EC0EECC0033EE6D /* Vision+ML Example */ = {
 			isa = PBXGroup;
 			children = (
+				665B8904216150F2003D8C08 /* Sounds */,
 				D8D62F8821614AE4003BC27B /* AnimalClassifier.mlmodel */,
 				11063F611EC0EECC0033EE6D /* AppDelegate.swift */,
 				11063F631EC0EECC0033EE6D /* ImageClassificationViewController.swift */,
@@ -68,6 +77,17 @@
 				C82A1C951F1809F5005996F6 /* Supporting Files */,
 			);
 			path = "Vision+ML Example";
+			sourceTree = "<group>";
+		};
+		665B8904216150F2003D8C08 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				665B890B2161538A003D8C08 /* baah.mp3 */,
+				665B89092161534D003D8C08 /* moo.mp3 */,
+				665B890721615318003D8C08 /* meow.mp3 */,
+				665B8905216151D2003D8C08 /* bark.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		A9563AD0A9557D1000000001 /* Configuration */ = {
@@ -147,8 +167,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				665B890A2161534D003D8C08 /* moo.mp3 in Resources */,
 				113695D81EC1151400CA6C43 /* LaunchScreen.storyboard in Resources */,
+				665B890821615318003D8C08 /* meow.mp3 in Resources */,
 				11063F691EC0EECC0033EE6D /* Assets.xcassets in Resources */,
+				665B890C2161538A003D8C08 /* baah.mp3 in Resources */,
+				665B8906216151D2003D8C08 /* bark.mp3 in Resources */,
 				11063F671EC0EECC0033EE6D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
