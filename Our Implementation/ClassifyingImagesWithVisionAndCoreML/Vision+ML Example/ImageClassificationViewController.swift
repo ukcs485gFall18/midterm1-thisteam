@@ -42,6 +42,9 @@ class ImageClassificationViewController: UIViewController {
         }
     }()
     
+    
+    
+    //https://apple.github.io/turicreate/docs/userguide/image_similarity/export-coreml.html helped with this alot
     lazy var similarityRequest: VNCoreMLRequest = {
         do{
             let model = try VNCoreMLModel(for: SimilarAnimals().model)
@@ -55,6 +58,7 @@ class ImageClassificationViewController: UIViewController {
             fatalError("Failed to load ML Model: \(error)")
         }
     }()
+    
     
     func processQuery(for request: VNRequest, error: Error?, k: Int = 5) {
         DispatchQueue.main.async {
@@ -77,7 +81,8 @@ class ImageClassificationViewController: UIViewController {
             let knn = sorted[..<min(k, numReferenceImages)]
             let first = knn[0]
             
-            self.similarityLable.text = "Image number " + String(describing: first.offset + 1) + " is most similar." //NOTE THE PLUS ONE IS DUE TO THE FACE THAT 1.JPG IS NOT IN THE MODEL
+            
+            //get image path, based on first in knn
             let imageURL = "./" + String(describing: first.offset + 1) + ".jpg"
             
             self.similarImage.image = UIImage(named : imageURL)
