@@ -21,9 +21,8 @@ import os
 
 #CREATE SIMILAR IMAGE FINDER
 
-reference_data = tc.image_analysis.load_images('./Data')
+reference_data = tc.image_analysis.load_images('./SimilarityData')
 reference_data = reference_data.add_row_number()
-reference_data.save('./animal.sframe')
 
 
 model = tc.image_similarity.create(reference_data)
@@ -35,5 +34,4 @@ query_results.head()
 reference_data[9]['image'].show()
 similar_rows = query_results[query_results['query_label'] == 9]['reference_label']
 reference_data.filter_by(similar_rows, 'id').explore()
-model.save('animalSimilar.model')
 model.export_coreml('SimilarAnimals.mlmodel')
