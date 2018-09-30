@@ -13,6 +13,7 @@ import ImageIO
 class ImageClassificationViewController: UIViewController {
     // MARK: - IBOutlets
     
+    @IBOutlet weak var similarImage: UIImageView!
     @IBOutlet weak var similarityLable: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
@@ -76,11 +77,17 @@ class ImageClassificationViewController: UIViewController {
             let knn = sorted[..<min(k, numReferenceImages)]
             let first = knn[0]
             
-            self.similarityLable.text = "Image number" + String(describing: first.offset) + "is most similar."
+            self.similarityLable.text = "Image number " + String(describing: first.offset + 1) + " is most similar." //NOTE THE PLUS ONE IS DUE TO THE FACE THAT 1.JPG IS NOT IN THE MODEL
+            let imageURL = "./" + String(describing: first.offset + 1) + ".jpg"
+            
+            self.similarImage.image = UIImage(named : imageURL)
+            
+
         }
     }
     
     func updateSimilarity(for image: UIImage){
+        similarImage.image = nil
         similarityLable.text = "Finding Similarities..."
         let orientation = CGImagePropertyOrientation(image.imageOrientation)
         guard let ciImage = CIImage(image: image) else { fatalError("Unable to create \(CIImage.self) from \(image).") }
