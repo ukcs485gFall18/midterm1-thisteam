@@ -140,10 +140,7 @@ fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePicke
 	return input.rawValue
 }
 
-// Added by Adam Brassfield
-func playSound(for animal:String) {
-    print(animal)
-}
+
 
 //Added by Caitlin Jones
 func addText(for animal:String){
