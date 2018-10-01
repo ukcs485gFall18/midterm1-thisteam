@@ -200,12 +200,10 @@ class ImageClassificationViewController: UIViewController {
     //Added by Caitlin Jones
     func addText(animal : String){
         //Add text overlay to picture
-        //Identify the correct sound for the animal identified
-        //Concatenate the output string
-        //output the string
         //https://stackoverflow.com/questions/29421726/swift-how-to-get-the-string-before-a-certain-character
         //https://www.hackingwithswift.com/example-code/strings/how-to-convert-a-string-to-lowercase-letters
         
+        //Create a dictionary of animals and the sounds they make
         var soundDictionary = [
             "cat" : "meow",
             "dog" : "bark",
@@ -213,10 +211,11 @@ class ImageClassificationViewController: UIViewController {
             "sheep" : "baa",
             "cow" : "moo"
         ]
-        
+        //parse the animal string to get the name without the percentage, and format it
         let simplifiedAnimal = (animal.components(separatedBy: ") ")[1]).lowercased()
+        //search the dictionary for the correct animal sound
         let animalSound = soundDictionary[simplifiedAnimal]
-        print("This is a " + simplifiedAnimal)
+        //Modify the HelloLabel text to include the name and sound.
         HelloLabel.text = "This is a " + simplifiedAnimal + ". It goes " + animalSound! + "!"
     }
     
