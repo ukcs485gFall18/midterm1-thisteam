@@ -18,6 +18,7 @@ class ImageClassificationViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var classificationLabel: UILabel!
+    @IBOutlet weak var HelloLabel: UILabel!
     
 
     // MARK: - Image Classification
@@ -159,6 +160,8 @@ class ImageClassificationViewController: UIViewController {
                 playSound(for: descriptions[0])
                 // end
                 self.classificationLabel.text = "Classification:\n" + descriptions.joined(separator: "\n")
+                
+                self.addText(animal: descriptions[0])
             }
         }
     }
@@ -193,6 +196,30 @@ class ImageClassificationViewController: UIViewController {
         picker.sourceType = sourceType
         present(picker, animated: true)
     }
+    
+    //Added by Caitlin Jones
+    func addText(animal : String){
+        //Add text overlay to picture
+        //Identify the correct sound for the animal identified
+        //Concatenate the output string
+        //output the string
+        //https://stackoverflow.com/questions/29421726/swift-how-to-get-the-string-before-a-certain-character
+        //https://www.hackingwithswift.com/example-code/strings/how-to-convert-a-string-to-lowercase-letters
+        
+        var soundDictionary = [
+            "cat" : "meow",
+            "dog" : "bark",
+            "turtle" : "ehhh",
+            "sheep" : "baa",
+            "cow" : "moo"
+        ]
+        
+        let simplifiedAnimal = (animal.components(separatedBy: ") ")[1]).lowercased()
+        let animalSound = soundDictionary[simplifiedAnimal]
+        print("This is a " + simplifiedAnimal)
+        HelloLabel.text = "This is a " + simplifiedAnimal + ". It goes " + animalSound! + "!"
+    }
+    
 }
 
 extension ImageClassificationViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -213,14 +240,4 @@ extension ImageClassificationViewController: UIImagePickerControllerDelegate, UI
 // Helper function inserted by Swift 4.2 migrator.
 fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
 	return input.rawValue
-}
-
-
-
-//Added by Caitlin Jones
-func addText(for animal:String){
-    //Add text overlay to picture
-    //Identify the correct sound for the animal identified
-    //Concatenate the output string
-    //output the string
 }
