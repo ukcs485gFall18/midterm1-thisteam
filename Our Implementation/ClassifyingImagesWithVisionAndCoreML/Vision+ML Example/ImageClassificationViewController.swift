@@ -207,7 +207,7 @@ class ImageClassificationViewController: UIViewController {
         var soundDictionary = [
             "cat" : "meow",
             "dog" : "bark",
-            "turtle" : "ehhh",
+            "turtle" : "gurgle",
             "sheep" : "baa",
             "cow" : "moo"
         ]

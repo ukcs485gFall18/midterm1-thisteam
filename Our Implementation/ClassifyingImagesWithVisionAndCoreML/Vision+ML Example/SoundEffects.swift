@@ -28,13 +28,13 @@ func playSound(for animal:String) {
     
     var soundURL:URL
     // The animal types include dog, cat, cow, sheep, and turtle
-    if (animal.contains("dog")) {
+    if (animal.lowercased().contains("dog")) {
         soundURL = Bundle.main.url(forResource: "bark", withExtension: "mp3")!
-    } else if (animal.contains("cat")) {
+    } else if (animal.lowercased().contains("cat")) {
         soundURL = Bundle.main.url(forResource: "meow", withExtension: "mp3")!
-    } else if (animal.contains("cow")) {
+    } else if (animal.lowercased().contains("cow")) {
         soundURL = Bundle.main.url(forResource: "moo", withExtension: "mp3")!
-    } else if (animal.contains("sheep")) {
+    } else if (animal.lowercased().contains("sheep")) {
         soundURL = Bundle.main.url(forResource: "baah", withExtension: "mp3")!
     } else {
         soundURL = Bundle.main.url(forResource: "turtleNoise", withExtension: "mp3")!
