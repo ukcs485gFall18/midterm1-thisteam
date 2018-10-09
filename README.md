@@ -1,7 +1,9 @@
 # midterm1-thisteam
 
 Ryan Gaines: Added similarity model
+
 Adam Brassfield: Added animal noises
+
 Caitlyn Jones: Add text features
 
 Tutorial Link:
