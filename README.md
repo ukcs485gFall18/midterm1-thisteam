@@ -4,7 +4,7 @@ Ryan Gaines: Added similarity model
 
 Adam Brassfield: Added animal noises
 
-Caitlyn Jones: Add text features
+Caitlin Jones: Add text features
 
 Tutorial Link:
 https://www.raywenderlich.com/5653-create-ml-tutorial-getting-started
